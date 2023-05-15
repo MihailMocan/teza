@@ -6,7 +6,7 @@ import { Login } from "./Components/AuthComponents/Login";
 function App() {
   return (
     <div className="App">
-      {/*<Registration />*/}\
+      {/*<Registration />*/}
       <Login />
     </div>
   );

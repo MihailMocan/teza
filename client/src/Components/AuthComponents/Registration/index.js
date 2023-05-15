@@ -29,7 +29,6 @@ export const Registration = () => {
               />
             </div>
             <div className={style.inputContainer}>
-              <span>Birthday : </span>
               <input
                 type={"date"}
                 {...register("birthday", { required: true })}
