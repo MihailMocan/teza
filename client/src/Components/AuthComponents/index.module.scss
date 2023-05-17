@@ -1,11 +1,17 @@
+body {
+  width: 100%;
+  height: 100%;
+}
 .wrapper {
   width: 50%;
-
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
-  margin-left: 75px;
+  align-items: center;
   background-color: #61dafb;
 }
 .container {
+  margin-top: 10%;
   width: 100%;
   height: 100%;
   background-color: aquamarine;
@@ -21,17 +27,16 @@
   font-size: 36px;
   font-weight: 700;
 }
-input,
-input:focus-visible {
+.inputAuth,
+.inputAuth:focus-visible {
   box-sizing: border-box;
-  width: 300px;
   height: 33px;
   font-size: 14px;
   padding: 6px 0;
   border: none;
   border-bottom: 1px solid #999;
 }
-input::placeholder {
+.inputAuth::placeholder {
   padding-left: 10px;
 }
 .inputContainer {
@@ -43,6 +48,7 @@ button {
   border: none;
   height: 40px;
   margin-bottom: 30px;
+  margin-left: 30px;
   font-size: 14px;
   cursor: pointer;
   &:hover {

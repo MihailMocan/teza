@@ -1,0 +1,169 @@
+.container {
+  position: absolute;
+  left: 20%;
+  .navbarWrapper {
+    display: flex;
+    .navbar {
+      display: flex;
+      .item_link {
+        color: #004890;
+        display: block;
+        height: 32px;
+        line-height: 32px;
+        padding: 0 15px;
+        text-align: center;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 13px;
+        float: left;
+        margin: 0;
+        text-decoration: none;
+      }
+    }
+    .userInfo {
+      display: flex;
+      padding-left: 30px;
+      margin-left: 15px;
+      height: 32px;
+      line-height: 32px;
+      border-left: #dcdcdc solid 1px;
+      .userName {
+        padding-left: 10px;
+        color: #004890;
+        text-decoration: none !important;
+      }
+    }
+    .socialPage {
+      margin-left: 15px;
+      padding-left: 25px;
+      float: right;
+      border-left: #dcdcdc solid 1px;
+      a {
+        color: #777;
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+        min-width: 32px;
+        padding: 0;
+        margin: 0;
+      }
+      .socialBtn {
+        background-position: 50% -32px;
+        background-image: url("https://www.econsulat.ro/Content/new-ui/dist/assets/images/social-sprite.png");
+        background-repeat: no-repeat;
+        height: 32px;
+        width: 32px;
+        display: block;
+        float: left;
+        margin: 0 10px 0 0;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .searchService {
+    display: flex;
+    margin-top: 20px;
+    width: 80%;
+    justify-content: space-around;
+    h2 {
+      font-weight: 400;
+      color: #004890;
+      text-transform: uppercase;
+      position: relative;
+      margin: 0;
+      font-size: 21px;
+      height: 50px;
+      line-height: 50px;
+    }
+    .searchBox {
+      position: relative;
+      .searchIcon {
+        line-height: 50px;
+        position: absolute;
+        left: 5%;
+        top: 30%;
+        text-align: center;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+        font-size: 21px;
+        z-index: 33;
+        color: #004890;
+      }
+      input {
+        width: 120%;
+        padding-left: 50px;
+        height: 50px;
+        font-size: 19px;
+        border-color: #004890;
+      }
+    }
+    input {
+    }
+  }
+  .serviceContainer {
+    position: absolute;
+    left: 0;
+    .services {
+      width: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .servicesItem {
+        background: #f4f4f4;
+        width: 33%;
+        display: block;
+        padding: 0;
+        border: 1px solid #ccc;
+        position: relative;
+        border-radius: 10px;
+        margin: 10px 20px 20px;
+        height: 154px;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          cursor: pointer;
+          background-color: #67cbe8;
+
+          .servicesContent,
+          .servicesLabel,
+          .serviceIcon {
+            color: #ffffff;
+          }
+        }
+
+        .servicesLabel {
+          color: #004890;
+          display: block;
+          font-weight: 400;
+          position: absolute;
+          left: 15px;
+          top: 18px;
+          white-space: nowrap;
+        }
+
+        .servicesContent {
+          margin: 50px 0 20px;
+          padding: 0 10px;
+          font-size: 15px;
+          line-height: 1.6em;
+          text-align: center;
+          color: #737373;
+        }
+
+        .serviceIcon {
+          color: #004890;
+          width: 35px;
+          line-height: 54px;
+          height: 30px;
+          position: absolute;
+          right: 10px;
+          top: 12px;
+          font-size: 30px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

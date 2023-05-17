@@ -1,14 +1,18 @@
 import logo from "./logo.svg";
-import "./App.css";
 import { Registration } from "./Components/AuthComponents/Registration";
 import { Login } from "./Components/AuthComponents/Login";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { MainPage } from "./Components/MainPage";
 
 function App() {
   return (
-    <div className="App">
-      {/*<Registration />*/}
-      <Login />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="registration" element={<Registration />} />
+        <Route path="main" element={<MainPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
