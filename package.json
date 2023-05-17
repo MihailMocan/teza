@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "npm start --prefix client",
-    "backend": "npm start --prefix server",
+    "client": " cd client && npm i && npm start",
+    "backend": "cd server && npm i && npm start ",
     "start": "concurrently \"npm run client\" \"npm run backend\""
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "concurrently": "^8.0.1"
   }
 }
