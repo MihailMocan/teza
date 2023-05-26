@@ -3,11 +3,15 @@ import { useForm } from "react-hook-form";
 import style from "../index.module.scss";
 import axios from "axios";
 import { AuthRequestInstance } from "../../../Axios/auth";
+import { useNavigate } from "react-router-dom";
 export const Registration = () => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const onSubmit = async (userInfo) => {
     const response = await AuthRequestInstance.registration(userInfo);
-    console.log("Response : ", response);
+    if (response.statusCode === 200) {
+      navigate("/login");
+    }
   };
   return (
     <div className={style.container}>
@@ -46,13 +50,15 @@ export const Registration = () => {
                 placeholder={"Email"}
               />
             </div>
-            <div className={style.inputContainer}>
-              <input
-                type={"text"}
-                className={style.inputAuth}
-                {...register("nationality", { required: true })}
-                placeholder={"Nationality"}
-              />
+            <div className={style.selectContainer}>
+              <select {...register("nationality", { required: true })}>
+                <option value={"Republica Moldova"} selected={true}>
+                  Republica Moldova
+                </option>
+                <option value={"Romania"}>Romania</option>
+                <option value={"Ucraina "}>Ucraina</option>
+                <option value={"Rusia "}>Rusia</option>
+              </select>
             </div>
             <div className={style.inputContainer}>
               <input
@@ -78,7 +84,12 @@ export const Registration = () => {
                 placeholder={"Password"}
               />
             </div>
-            <button type={"submit"}>Register</button>
+            <div style={{ marginTop: "-20px", marginBottom: "15px" }}>
+              <a href={"/login"}>Login </a>
+            </div>
+            <button className={style.authButton} type={"submit"}>
+              Register
+            </button>
           </form>
         </div>
       </div>

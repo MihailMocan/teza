@@ -104,6 +104,7 @@
   .serviceContainer {
     position: absolute;
     left: 0;
+
     .services {
       width: 90%;
       display: flex;
@@ -125,7 +126,6 @@
         &:hover {
           cursor: pointer;
           background-color: #67cbe8;
-
           .servicesContent,
           .servicesLabel,
           .serviceIcon {
@@ -166,4 +166,163 @@
       }
     }
   }
+}
+
+.condition {
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.buttonContainer {
+  left: 38%;
+  position: absolute;
+}
+.delogareButton {
+  border: none;
+  background-color: #222222;
+  width: 80px;
+  height: 32px;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.applyButton {
+  background-color: #e7e7e7;
+  color: #004890;
+  border: none;
+  width: 200px;
+  height: 80px;
+  font-size: 15px;
+  font-weight: 600;
+  &:hover {
+    background-color: #12b1de;
+    cursor: pointer;
+    color: white;
+  }
+}
+.decisionContainer {
+  margin: 50px 0;
+  display: flex;
+}
+.passportButton {
+  color: #004890;
+  border: none;
+  width: 200px;
+  height: 60px;
+  background-color: #d3d3d3;
+  font-size: 16px;
+  font-weight: 600;
+  &:hover {
+    cursor: pointer;
+    background-color: #0ca9d5;
+    color: white;
+  }
+}
+
+.modal {
+  font-family: arial;
+}
+
+.modal {
+  position: fixed;
+  width: 600px;
+  z-index: 1040;
+  top: 30%;
+  left: 30%;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.modalTitle {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.modalHeader {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.modalDesc,
+.modalHeader,
+.modalFooter {
+  padding: 12px;
+}
+.modalDesc {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #e9ecef;
+}
+.modalFooter {
+  display: flex;
+  justify-content: center;
+}
+.closeButton {
+  position: absolute;
+  right: 5%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  border: none;
+  background-color: white;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.button {
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-radius: 5px;
+  border: none;
+}
+
+.modalFooter {
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.secondaryButton {
+  color: #fff;
+  background-color: #6c757d;
+  height: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.primaryButton {
+  color: #fff;
+  height: 30px;
+  width: fit-content;
+  background-color: #007bff;
+  border: #007bff;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modalExample {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

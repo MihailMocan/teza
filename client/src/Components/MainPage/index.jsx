@@ -1,54 +1,135 @@
 import style from "./index.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icon } from "@fortawesome/fontawesome-svg-core";
-import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
-import {
-  faBalanceScale,
-  faBriefcase,
-  faDiamond,
-  faDiamondTurnRight,
-  faEarthAmerica,
-  faFileText,
-  faGlobe,
-} from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { Services } from "./Services";
+import { CheckPassport } from "../Services/Passport/CheckPassport";
+import { Modal } from "./Modal";
+import { PassportPreview } from "../Services/Passport/PassportPreview";
+import { ServiceAPIInstance } from "../../Axios/service";
+import { logout } from "../../Redux/Reducers/authReducer";
 
-export const MainPage = () => {
-  const username = "Mocan Mihail";
-  return (
+export const MainPage = ({ name = "nicolai", isAuth = true, logout }) => {
+  const [changeContent, setContent] = useState(false);
+  const [checkPassport, setCheckPassport] = useState(false);
+  const [createPassport, setCreatePassport] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [passportData, setData] = useState(null);
+  const navigate = useNavigate();
+  const returnToHome = () => {
+    setContent(false);
+  };
+
+  const [children, setChildren] = useState(null);
+  const createPassportData = useCallback(async () => {
+    try {
+      const data = await ServiceAPIInstance.createPassport();
+      if (data.statusCode === 200) {
+        setData(data.data);
+        setChildren(
+          <div>
+            Pasaportul dumneavoastra a fost generat cu IDNP -ul :
+            {data.data.idnp}
+          </div>
+        );
+      } else {
+        const idnp = data.idnp;
+        setChildren(
+          <div>
+            Eroare , Dumneavoatra deja aveti un pasaport cu IDNP -ul : {idnp} !
+          </div>
+        );
+      }
+    } catch (e) {
+      console.log("Error : ", e);
+    }
+  }, []);
+  const handleClose = () => {
+    setCheckPassport(false);
+    setCreatePassport(false);
+    setShowModal(false);
+    setData(null);
+  };
+  const handleClickCheckPassport = () => {
+    setCheckPassport(true);
+    setShowModal(true);
+  };
+  const handleClickCreatePassport = () => {
+    setCreatePassport(true);
+    setShowModal(true);
+  };
+
+  const headerContent = checkPassport
+    ? "Verificare pasaport"
+    : createPassport
+    ? "Pasaportul generat "
+    : "";
+
+  useEffect(() => {
+    if (checkPassport) {
+      const tempValue = passportData ? (
+        <PassportPreview passportData={passportData} />
+      ) : (
+        <CheckPassport onChange={setData} />
+      );
+      setChildren(tempValue);
+    }
+  }, [checkPassport, passportData]);
+  useEffect(() => {
+    if (createPassport) {
+      createPassportData();
+    }
+  }, [createPassport]);
+
+  return isAuth ? (
     <div className={style.container}>
       <div className={style.navbarWrapper}>
         <div className={style.navbar}>
           <div>
-            <a href={"#"} className={style.item_link}>
+            <a
+              href={"https://chisinau.mae.ro/node/148"}
+              className={style.item_link}
+            >
               Despre Noi
             </a>
           </div>
           <div>
-            <a href={"#"} className={style.item_link}>
+            <a href={"#"} onClick={returnToHome} className={style.item_link}>
               Depunere Cerere
             </a>
           </div>
           <div>
-            <a href={"#"} className={style.item_link}>
-              Cererile Mele
+            <a
+              href={"https://chisinau.mae.ro/node/270"}
+              className={style.item_link}
+            >
+              Acte necesre
             </a>{" "}
           </div>
           <div>
-            <a href={"#"} className={style.item_link}>
+            <a
+              href={"https://asp.gov.md/ro/contacte"}
+              className={style.item_link}
+            >
               Contacte
             </a>
           </div>
         </div>
         <div className={style.userInfo}>
           <span>Bine ati venit,</span>
-          <a href={"#"} className={style.userName}>
-            {username}
-          </a>
+          <span className={style.userName}>{name}</span>
         </div>
         <div className={style.socialPage}>
-          <a href={"#"}>
+          <a
+            href={
+              "https://www.facebook.com/ambasada.romaniei.in.republica.moldova?sk=timeline"
+            }
+          >
             <i className={style.socialBtn}> </i>
           </a>
+          <button onClick={logout} className={style.delogareButton}>
+            Delogare
+          </button>
         </div>
       </div>
       <div>
@@ -58,84 +139,42 @@ export const MainPage = () => {
           }
         />
       </div>
-      <div className={style.serviceContainer}>
-        <div className={style.searchService}>
-          <h2>Servicii consulare</h2>
-          <div className={style.searchBox}>
-            <FontAwesomeIcon className={style.searchIcon} icon={faSearch} />
-            <span>
-              <input type={"text"} placeholder={"Cautati serviciul dorit"} />
-            </span>
-          </div>
-        </div>
-        <div className={style.services}>
-          <div className={style.servicesItem}>
-            <a>
-              <h3>
-                <FontAwesomeIcon
-                  className={style.serviceIcon}
-                  icon={faEarthAmerica}
-                />
-                <span className={style.servicesLabel}>Cetatenie</span>
-              </h3>
-              <p className={style.servicesContent}>
-                dobândirea, redobândirea, renunţarea la cetăţenia română,
-                clarificarea statutului juridic
-              </p>
-            </a>
-          </div>
-          <div className={style.servicesItem}>
-            <a>
-              <h3>
-                <FontAwesomeIcon
-                  className={style.serviceIcon}
-                  icon={faBriefcase}
-                />
-                <span className={style.servicesLabel}>
-                  Documente de calatorie
-                </span>
-              </h3>
-              <p className={style.servicesContent}>
-                titlu de călătorie, paşaport simplu electronic, paşaport simplu
-                temporar, prima carte de identitate
-              </p>
-            </a>
-          </div>
-          <div className={style.servicesItem}>
-            <a>
-              <h3>
-                <FontAwesomeIcon
-                  className={style.serviceIcon}
-                  icon={faFileText}
-                />
-                <span className={style.servicesLabel}>
-                  Acte de stare civila
-                </span>
-              </h3>
-              <p className={style.servicesContent}>
-                transcriere, înregistrare certificat de naştere, deces,
-                căsătorie
-              </p>
-            </a>
-          </div>
 
-          <div className={style.servicesItem}>
-            <a>
-              <h3>
-                <FontAwesomeIcon
-                  className={style.serviceIcon}
-                  icon={faBalanceScale}
-                />
-                <span className={style.servicesLabel}>Acte notariale</span>
-              </h3>
-              <p className={style.servicesContent}>
-                procuri, declaraţii, efectuarea şi legalizarea de traduceri,
-                certificări
-              </p>
-            </a>
+      <Modal
+        showModal={showModal}
+        children={children}
+        handleClose={handleClose}
+        headingContent={headerContent}
+      />
+
+      {changeContent ? (
+        <div className={style.decisionContainer}>
+          <div className={style.buttonContainer}>
+            <button
+              onClick={() => handleClickCheckPassport()}
+              className={style.passportButton}
+            >
+              Verifica pasaportul
+            </button>
+            <div className={style.condition}>Sau</div>
+            <button
+              onClick={() => handleClickCreatePassport()}
+              className={style.passportButton}
+            >
+              Creaza unul nou
+            </button>
           </div>
         </div>
-      </div>
+      ) : (
+        <Services onClick={setContent} />
+      )}
     </div>
+  ) : (
+    navigate("/login")
   );
 };
+const mapStateToProps = (state) => ({
+  name: state.auth.name,
+  isAuth: state.auth.name,
+});
+export default connect(mapStateToProps, { logout })(MainPage);

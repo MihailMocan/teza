@@ -20,7 +20,7 @@ export const accessMiddleware = async (req, res, next) => {
         });
       }
     }
-    console.log("UserData : ", userData.email);
+
     req.user = userData._id;
     next();
   } catch (e) {

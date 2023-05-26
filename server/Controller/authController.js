@@ -3,7 +3,7 @@ import Users from "../Models/Users.js";
 import bcrypt from "bcrypt";
 import { TokenServiceInstance as TokenService } from "../Services/tokenService.js";
 class AuthController {
-  async registation(req, res, next) {
+  async registration(req, res, next) {
     try {
       const { userInfo } = req.body;
       const { email, password } = userInfo;
@@ -20,6 +20,7 @@ class AuthController {
         ...userInfo,
         password: hashPassword,
       }).save();
+
       const { _id } = newUser;
       const token = TokenService.generateToken({ _id, email });
       res.status(200).json({ statusCode: 200, userInfo, ...token });
@@ -44,6 +45,15 @@ class AuthController {
       const { _id } = userCandidate;
       const token = TokenService.generateToken({ _id, email });
       res.status(200).json({ statusCode: 200, ...token });
+    } catch (e) {
+      next(e);
+    }
+  }
+  async me(req, res, next) {
+    try {
+      const currentUser = req.user;
+      const userInfo = await Users.findById(currentUser);
+      return res.status(200).json({ statusCode: 200, userInfo });
     } catch (e) {
       next(e);
     }
